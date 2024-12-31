@@ -3,6 +3,7 @@ from pygame.locals import *
 from math import sin, cos, radians
 
 pygame.init()
+clock = pygame.time.Clock()
 
 Rot = (255,0,0); Background = (255, 255, 255); UI = (0, 0, 0)
 
@@ -24,6 +25,7 @@ Feld = pygame.display.set_mode((400, 400))
 Feld.fill(Background)
 UI_Draw()
 
+clock.tick(60) 
 
 mainloop = True
 s1 = 0
@@ -39,7 +41,15 @@ while mainloop:
     pygame.draw.circle(Feld, Background, MP, 182)
     pygame.draw.line(Feld, UI, MP, punkt(120, hm), 6)
     pygame.draw.line(Feld, UI, MP, punkt(170, m), 4)
-    pygame.draw.line(Feld, Rot, MP, punkt(180, s), 2)
+
+    current_time = time.time()
+    seconds = current_time % 60  # Dies gibt auch Dezimalstellen zurück
+    seconds_angle = 270 + (seconds * 6)  # 6 Grad pro Sekunde
+
+    seconds_x = MX + 180 * cos(radians(seconds_angle))
+    seconds_y = MY + 180 * sin(radians(seconds_angle))
+
+    pygame.draw.line(Feld, Rot, MP, (seconds_x, seconds_y), 2)
 
     
         
@@ -62,5 +72,6 @@ while mainloop:
         #Quit
         if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):
             mainloop = False
+
 
 pygame.quit()
