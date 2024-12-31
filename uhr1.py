@@ -1,7 +1,7 @@
 import pygame, time
 from pygame.locals import *
 from math import sin, cos, radians
-pygame.init
+pygame.init()
 
 Rot = (255,0,0); Weiss = (255, 255, 255); Schwarz = (0, 0, 0)
 
@@ -12,7 +12,6 @@ MX = 200; MY = 200; MP = ((MX, MY))
 def punkt(A, W):
     w1 = radians(W * 6 - 90); x1 = int(MX + A * cos(w1))
     y1 = int(MY + A * sin(w1))
-    print ((x1, y1)) 
     return ((x1, y1))
 
 for i in range(60):
